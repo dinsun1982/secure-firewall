@@ -6,13 +6,13 @@
 variable "rg_name" {
   type        = string
   description = "Azure Resource Group"
-  default     = ""
+  
 }
 
 variable "location" {
   description = "Geographic region resource will be deployed into"
   type        = string
-  default     = ""
+ 
 }
 
 variable "create_vn" {
@@ -29,53 +29,37 @@ variable "vn_name" {
 
 variable "vn_cidr" {
   type        = string
-  default     = "10.0.0.0/16"
   description = "Virtual Network CIDR"
+}
+
+variable "subnets" {
+  default = []
+  description = "subnets for ASA interfaces"
 }
 
 
 variable "subnet_size" {
   type        = string
-  default     = 24
   description = "Size of Subnets"
 }
 
-variable "source_address" {
-  type        = string
-  default     = "*"
-  description = "Limit the Management access to specific source"
-}
-
 variable "instances" {
-  description = "Number of FTDv instances"
+  description = "Number of fmcv instances"
 }
 
 variable "azs" {
-  default = [
-    "1",
-    "2",
-    "3"
-  ]
-  description = "Azure Availability Zones"
-}
-
-variable "prefix" {
-  default     = "cisco-FTDv"
-  description = "Prefix to prepend resource names"
-}
-
-variable "subnets" {
   default = []
-  description = "subnets for FTD interfaces"
+  description = "Azure Availability Zones"
 }
 
 variable "tags" {
   description = "The tags to associate with your network and subnets."
   type        = map(string)
-
   default = {
     ENV = "Dev"
   }
 }
-
-
+variable "prefix" {
+  default     = "cisco-FTDv"
+  description = "Prefix to prepend resource names"
+}

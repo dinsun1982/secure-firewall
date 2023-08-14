@@ -11,6 +11,9 @@ module "network" {
   rg_name                 = module.rg.resource_group_name[0]
   location                = module.rg.location[0]
   instances               = var.instances
+  azs                     = var.azs
+  vn_cidr                 = var.vn_cidr
+  subnet_size             = var.subnet_size
   depends_on              = [module.rg]
  }
 
@@ -19,6 +22,11 @@ module "network" {
   source                       = "../../../../terraform-modules/firewallserver"
   rg_name                      = module.rg.resource_group_name[0]
   location                     = module.rg.location[0]
+  image_version                = var.image_version
+  vm_size                      = var.vm_size
+  instancename                 = var.instancename
+  username                     = var.username
+  password                     = var.password
   instances                    = var.instances
   ftdv-interface-management    = [module.network.mgmt_interface[0]]
   ftdv-interface-diagnostic    = [module.network.diag_interface[0]]

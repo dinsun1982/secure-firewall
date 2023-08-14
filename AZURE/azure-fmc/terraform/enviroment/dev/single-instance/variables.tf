@@ -24,7 +24,7 @@ variable "location" {
  }
 
 variable "instances" {
-  description = "Number of FTDv instances"
+  description = "Number of fmcv instances"
 }
 
 variable "rg_name" {
@@ -64,7 +64,7 @@ variable "subnet_size" {
 
 variable "image_version" {
   type    = string
-  description = "Version of the FTDv"
+  description = "Version of the fmcv"
 }
 
 variable "vm_size" {
@@ -78,10 +78,10 @@ variable "instancename" {
 }
 variable "username" {
   type    = string
-  description = "Spacify username of FTDv server"
+  description = "Spacify username of fmcv server"
 }
 variable "password" {
   type    = string
-  description = "Spacify username of FTDv server"
+  description = "Spacify username of fmcv server"
   sensitive = true
 }

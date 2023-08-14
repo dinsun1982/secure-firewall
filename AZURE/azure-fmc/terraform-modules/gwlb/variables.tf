@@ -1,5 +1,5 @@
 variable "instances" {
-  description = "Number of asav instances"
+  description = "Number of fmcv instances"
   type = number
 }
 

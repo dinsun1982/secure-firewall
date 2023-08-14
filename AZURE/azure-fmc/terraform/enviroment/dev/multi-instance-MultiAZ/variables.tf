@@ -24,7 +24,7 @@ variable "location" {
  }
 
 variable "instances" {
-  description = "Number of FTDv instances"
+  description = "Number of asav instances"
 }
 
 variable "rg_name" {
@@ -35,7 +35,6 @@ variable "azs" {
   default = []
   description = "Azure Availability Zones"
 }
-
 
 ################################################################################################
 ### Network variables
@@ -57,14 +56,13 @@ variable "subnet_size" {
   description = "Size of Subnets"
 }
 
-
 ################################################################################################
 ### VM variables
 ################################################################################################
 
 variable "image_version" {
   type    = string
-  description = "Version of the FTDv"
+  description = "Version of the asav"
 }
 
 variable "vm_size" {
@@ -78,10 +76,45 @@ variable "instancename" {
 }
 variable "username" {
   type    = string
-  description = "Spacify username of FTDv server"
+  description = "Spacify username of asav server"
 }
 variable "password" {
   type    = string
-  description = "Spacify username of FTDv server"
+  description = "Spacify username of asav server"
   sensitive = true
 }
+
+
+################################################################################################
+### Load Balancer Variables
+################################################################################################
+
+variable "PIP_allocation_method" {
+  description = "puclic IP allocation method"
+  type        = string
+}
+
+variable "PIP_sku" {
+  description = "puclic IP SKU"
+  type        = string
+}
+variable "lb_sku" {
+  description = "loadbalancer SKU"
+  type        = string
+}
+
+variable "lb_rule_protocol_type" {
+  description = "loadbalancer rule protocol type"
+  type        = string
+}
+
+variable "lb_rule_frontend_port" {
+  description = "loadbalancer rule frontend port"
+  type        = string
+}
+
+variable "lb_rule_backend_port" {
+  description = "loadbalancer rule backend port"
+  type        = string
+}
+

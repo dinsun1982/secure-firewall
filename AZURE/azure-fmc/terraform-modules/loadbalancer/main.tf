@@ -7,8 +7,8 @@ resource "azurerm_public_ip" "ELB-PublicIP" {
   name                = "PublicIPForLB"
   location            = var.location
   resource_group_name = var.rg_name
-  allocation_method   = "Static"
-  sku                 = "Standard"
+  allocation_method   = var.PIP_allocation_method
+  sku                 = var.PIP_sku #"Standard"
 }
 
 resource "azurerm_lb" "fmc-elb" {
@@ -16,7 +16,7 @@ resource "azurerm_lb" "fmc-elb" {
   name                = "FMCV-ELB"
   location            = var.location
   resource_group_name = var.rg_name
-  sku                 = "Standard"
+  sku                 = var.lb_sku
 
   frontend_ip_configuration {
     name                 = "ExternalIPAddress"
@@ -43,9 +43,9 @@ resource "azurerm_lb_rule" "elbrule" {
   count                          = var.instances > 1 ? 1 : 0
   loadbalancer_id                = azurerm_lb.fmc-elb[0].id
   name                           = "ELBRule"
-  protocol                       = "Tcp"
-  frontend_port                  = 80
-  backend_port                   = 80
+  protocol                       = var.lb_rule_protocol_type
+  frontend_port                  = var.lb_rule_frontend_port
+  backend_port                   = var.lb_rule_backend_port
   frontend_ip_configuration_name = "ExternalIPAddress"
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.ELB-Backend-Pool[0].id]
   probe_id                       = azurerm_lb_probe.FMC-ELB-Probe[0].id

@@ -8,10 +8,13 @@ module "rg" {
 #--------------------------Network--------------------------------#
 module "network" {
   source                  = "../../../../terraform-modules/network"
-  rg_name                 = module.rg.resource_group_name[0]
-  location                = module.rg.location[0]
-  instances               = var.instances
-  depends_on              = [module.rg]
+  rg_name     = module.rg.resource_group_name[0]
+  location    = module.rg.location[0]
+  instances   = var.instances
+  azs         = var.azs
+  vn_cidr     = var.vn_cidr
+  subnet_size = var.subnet_size
+  depends_on  = [module.rg]
  }
 
 # # #--------------------------Firewall--------------------------------#
@@ -19,7 +22,13 @@ module "network" {
   source                       = "../../../../terraform-modules/firewallserver"
   rg_name                      = module.rg.resource_group_name[0]
   location                     = module.rg.location[0]
+  image_version                = var.image_version
+  vm_size                      = var.vm_size
+  instancename                 = var.instancename
+  username                     = var.username
+  password                     = var.password
   instances                    = var.instances
+  azs                          = var.azs
   fmcv-interface-management    = [module.network.mgmt_interface[0],module.network.mgmt_interface[1]]
   fmcv-interface-diagnostic    = [module.network.diag_interface[0],module.network.diag_interface[1]]
   fmcv-interface-outside       = [module.network.outside_interface[0],module.network.outside_interface[1]]
@@ -32,6 +41,12 @@ module "network" {
   rg_name                      = module.rg.resource_group_name[0]
   location                     = module.rg.location[0]
   instances                    = var.instances
+  PIP_allocation_method        = var.PIP_allocation_method
+  PIP_sku                      = var.PIP_sku
+  lb_sku                       = var.lb_sku
+  lb_rule_protocol_type        = var.lb_rule_protocol_type
+  lb_rule_frontend_port        = var.lb_rule_frontend_port
+  lb_rule_backend_port         = var.lb_rule_backend_port
   subnet_id                    = module.network.inside_subnet
   get_private_ip_address       = module.network.inside_subnet_cidr[0]
   chain_gwlb_id                = module.gwlb.azurerm_lb_frontend_ip_configuration[0]

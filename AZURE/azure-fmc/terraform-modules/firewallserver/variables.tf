@@ -1,3 +1,9 @@
+
+
+################################################################################################
+### VM variables
+################################################################################################
+
 variable "rg_name" {
   description = "resource group name"
   type        = string
@@ -15,42 +21,31 @@ variable "prefix" {
 }
 
 variable "instances" {
-  description = "Number of fmcv instances"
+  description = "Number of asav instances"
   type    = string
-  default = ""
-}
+ }
 
 variable "image_version" {
-  //default     = "70094.0.0"
-  default     = "73069.0.0"
   type    = string
-  description = "Version of the fmcv"
+  description = "Version of the asav"
 }
 
-
 variable "vm_size" {
-  default = "Standard_D3_v2"
   type    = string
   description = "Spacify VM size"
 }
-variable "RGName" {
-  default = "cisco-fmcv-RG"
-  type    = string
-}
+
 variable "instancename" {
   type    = string
-  default = "FMCV01"
   description = "Spacify instance name"
 }
 variable "username" {
   type    = string
-  default = "cisco"
-  description = "Spacify username of fmcv server"
+  description = "Spacify username of asav server"
 }
 variable "password" {
   type    = string
-  default = "P@$$w0rd1234"
-  description = "Spacify username of fmcv server"
+   description = "Spacify username of asav server"
   sensitive = true
 }
 
@@ -84,4 +79,3 @@ variable "fmcv-interface-inside" {
   description = "fmcv interface inside"
   default = []
 }
-
